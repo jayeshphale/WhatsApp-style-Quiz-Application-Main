@@ -1,0 +1,6 @@
+{
+  "name": "SkillBytes AI Tutor",
+  "description": "Full-stack WhatsApp-style conversational quiz learning assistant with real-time analytics, learning velocity index, fatigue tracking, and question difficulty metrics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
