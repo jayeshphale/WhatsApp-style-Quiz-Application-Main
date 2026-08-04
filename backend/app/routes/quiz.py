@@ -1,8 +1,8 @@
 import time
 from datetime import datetime
 from fastapi import APIRouter, HTTPException
-from backend.app.db.mongo import db
-from backend.app.models.schemas import QuizStartRequest, AnswerRequest
+from app.db.mongo import db
+from app.models.schemas import QuizStartRequest, AnswerRequest
 
 router = APIRouter()
 

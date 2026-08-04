@@ -1,6 +1,6 @@
 from typing import Optional
 from fastapi import APIRouter
-from backend.app.services.analytics_service import (
+from app.services.analytics_service import (
     compute_learning_velocity_pipeline,
     compute_fatigue_pipeline,
     compute_question_difficulty_pipeline

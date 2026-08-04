@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from typing import List
-from backend.app.db.mongo import db
+from app.db.mongo import db
 
 router = APIRouter()
 

@@ -1,6 +1,6 @@
 import math
 from typing import List, Dict, Any, Optional
-from backend.app.db.mongo import db
+from app.db.mongo import db
 
 def compute_learning_velocity_pipeline() -> List[Dict[str, Any]]:
     """
