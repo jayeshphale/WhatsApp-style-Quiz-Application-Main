@@ -4,7 +4,38 @@ A production-quality, full-stack **WhatsApp-style Quiz Application** built with 
 
 ---
 
-## 1. Quick Setup Instructions
+## 1. Project Structure
+
+The project is structured as a monorepo containing distinct frontend and backend services:
+
+```
+WhatsApp-style-Quiz-Application-Main/
+├── backend/
+│   ├── app/
+│   │   ├── main.py         # FastAPI main app entrypoint
+│   │   ├── routes/         # API routers (exams, quiz, analytics)
+│   │   ├── services/       # Core business logic / calculations
+│   │   ├── db/             # MongoDB database client and index init
+│   │   └── models/         # Pydantic schema models
+│   ├── requirements.txt    # Python dependencies
+│   ├── seed.py             # Database seeder script
+│   └── .env.example        # Backend-specific environment variables template
+├── frontend/
+│   ├── src/                # Vite React application source
+│   ├── index.html          # HTML entry point for the single page app
+│   ├── package.json        # Frontend and local Express proxy configuration
+│   ├── vite.config.ts      # Vite configuration
+│   ├── tsconfig.json       # TypeScript configuration
+│   ├── server.ts           # Companion Express server (local dev and mock APIs)
+│   ├── metadata.json       # App scaffold metadata
+│   └── .env.example        # Frontend-specific environment variables template
+├── README.md
+└── .gitignore
+```
+
+---
+
+## 2. Quick Setup Instructions
 
 ### Prerequisites
 - Node.js (v18+)
@@ -13,9 +44,14 @@ A production-quality, full-stack **WhatsApp-style Quiz Application** built with 
 
 ### Backend Setup (FastAPI & Python)
 ```bash
-# 1. Navigate to project root and set up virtual environment
+# 1. Navigate to backend directory and set up virtual environment
+cd backend
 python3 -m venv venv
+
+# On macOS/Linux:
 source venv/bin/activate
+# On Windows (PowerShell):
+.\venv\Scripts\Activate.ps1
 
 # 2. Install dependencies
 pip install -r requirements.txt
@@ -24,12 +60,13 @@ pip install -r requirements.txt
 python seed.py
 
 # 4. Start FastAPI Backend Server
-uvicorn backend.app.main:app --reload --port 8000
+uvicorn app.main:app --reload --port 8000
 ```
 
 ### Frontend Setup (React & Express Vite Proxy)
 ```bash
-# 1. Install Node dependencies
+# 1. Navigate to frontend directory and install Node dependencies
+cd frontend
 npm install
 
 # 2. Start full-stack development app (Express backend + Vite frontend on port 3000)
@@ -40,7 +77,7 @@ Open `http://localhost:3000` in your browser.
 
 ---
 
-## 2. Data Model Explanation (MongoDB Collections)
+## 3. Data Model Explanation (MongoDB Collections)
 
 The application stores data across 7 MongoDB collections with optimized compound and single indexes:
 
@@ -55,26 +92,26 @@ The application stores data across 7 MongoDB collections with optimized compound
 
 ---
 
-## 3. Analytics Formulas Rationale
+## 4. Analytics Formulas Rationale
 
-### 3.1 Learning Velocity Index (LVI)
+### 4.1 Learning Velocity Index (LVI)
 - **Formula**:
   $$\text{LVI} = (0.5 \times \text{Norm}(\text{Accuracy}) + 0.3 \times \text{Norm}(\text{Speed Score}) + 0.2 \times \text{Norm}(\text{Consistency Score})) \times 100$$
 - **Rationale**: Measuring student aptitude solely by accuracy ignores response speed and guessing variance. LVI synthesizes accuracy with speed (faster correct answers indicate higher mastery) and consistency (inverse coefficient of variation $\frac{\sigma}{\mu}$ where low variance shows steady comprehension). Min-Max normalization standardizes performance across candidate populations to a 0–100 percentile scale.
 
-### 3.2 Fatigue & Attention Decay
+### 4.2 Fatigue & Attention Decay
 - **Formula**:
   $$\text{Fatigue Score} = (\text{Accuracy}_{\text{First Bucket}} - \text{Accuracy}_{\text{Last Bucket}}) + \text{Norm}(\text{Response Duration}_{\text{Last Bucket}} - \text{Response Duration}_{\text{First Bucket}})$$
 - **Rationale**: Groups question events into 5-question sequential buckets ($Q1\text{–}5$, $Q6\text{–}10$, $Q11\text{–}15$, $Q16\text{–}20$). As exam length increases, cognitive exhaustion leads to dropping accuracy and rising response times. A positive fatigue score flags candidates or question sets where performance degrades sharply toward the end of a quiz.
 
-### 3.3 Question Difficulty Score
+### 4.3 Question Difficulty Score
 - **Formula**:
   $$\text{Difficulty Score} = (0.6 \times \text{Norm}(1 - \text{Accuracy}) + 0.4 \times \text{Norm}(\text{Avg Response Duration})) \times 100$$
 - **Rationale**: A question is genuinely hard if candidates frequently answer incorrectly AND require longer reflection time to process. Weighting inverse accuracy ($60\%$) with response duration ($40\%$) identifies tricky or ambiguous questions that require curriculum review.
 
 ---
 
-## 4. Key Features & Implementation Highlights
+## 5. Key Features & Implementation Highlights
 
 - **WhatsApp Chat Interface**: Interactive WhatsApp-style chat bubble questions, timed response cards, instant timestamp logging, and progress indicators.
 - **50 Pre-Seeded Student Profiles**: Instant login dropdown with active historical attempt logs.
