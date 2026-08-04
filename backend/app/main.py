@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.app.routes import exams, quiz, analytics
+from app.routes import exams, quiz, analytics
 from backend.app.db.mongo import init_indexes
 
 app = FastAPI(title="WhatsApp Quiz API Server", version="2.0")
