@@ -1,6 +1,15 @@
 # WhatsApp Quiz Application & Candidate Learning Analytics Engine
 
-A production-quality, full-stack **WhatsApp-style Quiz Application** built with candidate evaluation analytics, including **Learning Velocity Index (LVI)**, **Fatigue & Attention Decay Analysis**, and **Question Difficulty Score**.
+### Live Demo
+🔗 Frontend: https://whats-app-style-quiz-application-ma.vercel.app/
+
+### Backend API
+🔗 https://whatsapp-style-quiz-application-main.onrender.com/
+
+### Source Code
+🔗 https://github.com/jayeshphale/WhatsApp-style-Quiz-Application-Main
+
+A production-quality, full-stack WhatsApp-style Quiz Application built with candidate evaluation analytics, including Learning Velocity Index (LVI), Fatigue & Attention Decay Analysis, and Question Difficulty Score.
 
 ---
 
@@ -116,3 +125,5 @@ The application stores data across 7 MongoDB collections with optimized compound
 - **WhatsApp Chat Interface**: Interactive WhatsApp-style chat bubble questions, timed response cards, instant timestamp logging, and progress indicators.
 - **50 Pre-Seeded Student Profiles**: Instant login dropdown with active historical attempt logs.
 - **Full MongoDB Aggregation Pipelines**: High-performance backend analytics using `$group`, `$bucket`, `$lookup`, and `$stdDevPop`.
+
+
